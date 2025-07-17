@@ -1,13 +1,9 @@
 // app/orders/OrdersListClient.tsx
 "use client";
+import { fetchOrders } from "@/lib/actions/fetchOrders";
 import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
-import productsData from "@/data/products.json";
 
-async function fetchProducts() {
-  await new Promise((r) => setTimeout(r, 2000)); // 2s delay
-  return productsData.products;
-}
 export default function OrdersListClient({
   initialPage,
 }: {
@@ -15,7 +11,7 @@ export default function OrdersListClient({
 }) {
   const { data } = useQuery({
     queryKey: ["products", initialPage],
-    queryFn: fetchProducts,
+    queryFn: () => fetchOrders(initialPage),
   });
 
   return (

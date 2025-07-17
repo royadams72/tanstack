@@ -1,14 +1,14 @@
 import { QueryClient, dehydrate } from "@tanstack/react-query";
 import { HydrationBoundary } from "@tanstack/react-query";
 import OrdersListClient from "@/components/OrdersListClient";
-import productsData from "@/data/products.json";
+import { fetchOrders } from "@/lib/actions/fetchOrders";
 
 export default async function OrdersPage() {
   const queryClient = new QueryClient();
 
   await queryClient.prefetchQuery({
     queryKey: ["products", 1],
-    queryFn: async () => productsData.products,
+    queryFn: async () => fetchOrders(1),
   });
 
   const dehydratedState = dehydrate(queryClient);
