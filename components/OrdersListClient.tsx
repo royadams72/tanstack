@@ -16,14 +16,17 @@ export default function OrdersListClient({
 
   return (
     <ul>
-      {data?.map((o: any) => (
-        <li key={o.id}>
-          <Link href={`/orders/${o.id}/edit/`}>{o.title}</Link>
-          <ul>
-            <li>{o.availabilityStatus}</li>
-          </ul>
-        </li>
-      ))}
+      {data &&
+        data?.map((o: any) => (
+          <li key={o.id}>
+            <Link href={`/orders/${o.id}/edit/?page=${initialPage}`}>
+              {o.title}
+            </Link>
+            <ul>
+              <li>{o.availabilityStatus}</li>
+            </ul>
+          </li>
+        ))}
     </ul>
   );
 }

@@ -3,7 +3,9 @@
 import { useOptimistic, startTransition } from "react";
 import { updateOrderStatus } from "@/lib/actions/updateOrderStatus";
 
-type Props = { order: { id: string; availabilityStatus: string } };
+type Props = {
+  order: { id: string; availabilityStatus: string; page: string };
+};
 
 export function StatusForm({ order }: Props) {
   console.log(order);
@@ -12,7 +14,7 @@ export function StatusForm({ order }: Props) {
     order.availabilityStatus,
     (_prev, newStatus: string) => newStatus
   );
-  const action = updateOrderStatus.bind(null, order.id);
+  const action = updateOrderStatus.bind(null, order.id, order.page);
   return (
     <form action={action}>
       <select
